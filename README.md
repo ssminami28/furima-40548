@@ -16,7 +16,6 @@ has_many :items
 has_many :orders
 
 ## items テーブル
-## prefecture 県
 
 | Column                 | Type       | Options     |
 | ---------------------- | ---------- | ----------- |
@@ -48,8 +47,6 @@ belongs_to :item
 has_one :address
 
 ## addresses テーブル
-## postcode 郵便番号
-## block 市区町村
 
 | Column           | Type       | Options                        | 
 | ---------------- | ---------- | ------------------------------ |
