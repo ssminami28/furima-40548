@@ -4,7 +4,7 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| email              | string | null: false |
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
@@ -20,13 +20,12 @@ has_many :orders
 | Column                 | Type       | Options     |
 | ---------------------- | ---------- | ----------- |
 | title                  | string     | null: false |
-| text                   | text       | null: false |
+| description            | text       | null: false |
 | category_id            | integer    | null: false |
 | sales_status_id        | integer    | null: false |
 | prefecture_id          | integer    | null: false |
 | price                  | integer    | null: false |
 | user                   | references | null: false, foreign_key: true |
-| genre_id               | integer    | null: false |
 | scheduled_delivery_id  | integer    | null: false |
 | shipping_fee_status_id | integer    | null: false |
 
