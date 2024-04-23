@@ -1,5 +1,6 @@
 <%= render "shared/second-header"%>
 <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
+<div class='form-wrap'>
   <div class='form-header'>
     <h1 class='form-header-text'>
       会員情報入力
@@ -85,7 +86,7 @@
   </div>
   <div class="form-group">
     <h2 class='form-bottom-text'>
-      「会員登録」のボタンを押すことにより、
+      「会員登録」のボタンを押すことにより、<br>
       <span>利用規約</span>
       <br>に同意したものとみなします
     </h2>
