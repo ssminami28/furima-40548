@@ -1,2 +1,26 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  has_one_attached :image
+  belongs_to :user
+
+  belongs_to_active_hash :category
+  belongs_to_active_hash :sales_status
+  belongs_to_active_hash :shipping_fee_status
+  belongs_to_active_hash :prefecture
+  belongs_to_active_hash :scheduled_delivery
+
+  validates :title, presence: true
+  validates :text, presence: true
+  validates :image, presence: true
+  validates :category_id, presence: true
+  validates :sales_status_id, presence: true
+  validates :shipping_fee_status_id, presence: true
+  validates :prefecture_id, presence: true
+  validates :scheduled_delivery_id, presence: true
+  validates :price, presence: true
+  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :sales_status_id, numericality: { other_than: 1, message: "can't be blank"} 
+  validates :shipping_fee_status_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :scheduled_delivery_id, numericality: { other_than: 1, message: "can't be blank" }
 end
