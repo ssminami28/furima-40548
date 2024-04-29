@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
+    @order_address = OrderAddress.new 
   end
 
   def create
@@ -23,9 +24,7 @@ class OrdersController < ApplicationController
   private
 
   def order_address_params
-    params.require(:order_address).permit(:post_code, :prefecture_id, :city_name, :block_name, :building_name, :phone_number).merge(
-      item_id: @item.id, user_id: current_user.id, token: params[:token]
-    )
+    params.require(:order_address).permit(:post_code, :prefecture_id, :city_name, :block_name, :building_name, :phone_number).merge(item_id: @item.id, user_id: current_user.id, token: params[:token])
   end
 
   def pay_item
