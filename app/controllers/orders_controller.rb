@@ -1,14 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
+  before_action :check_access, only: [:index]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
-    @order_address = OrderAddress.new
-    redirect_to root_path and return if current_user == @item.user
-    return unless @item.order.present?
-
-    redirect_to root_path and return
   end
 
   def create
@@ -19,7 +16,6 @@ class OrdersController < ApplicationController
       @order_address.save
       redirect_to root_path
     else
-      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render 'index', status: :unprocessable_entity
     end
   end
@@ -39,5 +35,15 @@ class OrdersController < ApplicationController
       card: order_address_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def check_access
+    return unless @item.user == current_user || @item.order.present?
+
+    redirect_to root_path and return
   end
 end
