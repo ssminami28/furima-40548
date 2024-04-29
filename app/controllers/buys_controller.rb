@@ -7,7 +7,7 @@ class BuysController < ApplicationController
     @buy = Buy.new(order_params)
     if @buy.valid?
       @buy.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index', status: :unprocessable_entity
     end
